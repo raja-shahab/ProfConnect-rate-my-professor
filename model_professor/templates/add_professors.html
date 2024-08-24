@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Tracker</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #202121;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: #000000;
+            border: 1px solid #3FC3D7;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(63, 195, 215, 0.5);
+            color: #FFFFFF;
+        }
+
+        h2, h4 {
+            color: #3FC3D7;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background-color: #333333;
+            color: #FFFFFF;
+            border: 1px solid #3FC3D7;
+        }
+
+        .btn-success {
+            background-color: #3FC3D7;
+            border-color: #3FC3D7;
+        }
+
+        .btn-primary {
+            background-color: #3FC3D7;
+            border-color: #3FC3D7;
+        }
+
+        .btn-danger {
+            background-color: #FF3B30;
+            border-color: #FF3B30;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 10px rgba(63, 195, 215, 0.5);
+            border: 1px solid #3FC3D7;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #3FC3D7;
+        }
+
+        th {
+            background-color: #3FC3D7;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            color: white;
+            background-color: #333333;
+        }
+
+        tr:nth-child(odd) {
+            color: white;
+            background-color: #444444;
+        }
+
+        tr:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="col-6 mx-auto card" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2 class="text-center" style="color:#ffffff;">ProfConnect<span style="color: #3FC3D7;" >.</span></h2>
+    <h4>Add Professor Details</h4>
+    <hr>
+    <div class="form-group">
+        <label for="name">Professor Name</label>
+        <input name="name" type="text" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="expertise">Professor Expertise</label>
+        <input name="expertise" type="text" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="subject">Professor Subject</label>
+        <input name="subject" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="rating">Professor Rating</label>
+        <input name="rating" type="text" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="experience">Professor Experience</label>
+         <input name="experience" type="text" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Add Professor</button>
+</form>
+
+<hr>
+        <div class="text-center mt-4">
+        <a href="{% url 'get_professor_recommendation' %}">
+            <button class="btn btn-primary" style="background-color:#3FC3D7; border:none; padding: 10px 20px; font-size: 16px; border-radius: 5px;">
+        Recommend
+    </button>
+</a>
+
+        <p style="color:#ffffff; margin-top: 10px;">Click here to get the best professor recommendations based on your preferences!</p>
+    </div>
+
+
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Professor Name</th>
+            <th scope="col">Expertise</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for query in queryset %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{query.name}}</td>
+            <td>{{query.expertise}}</td>
+            <td>{{query.subject}}</td>
+            <td>{{query.rating}}</td>
+            <td>{{query.experience}} years</td>
+            <td>
+                <a href="/delete_professor/{{query.id }}" class="btn btn-danger m-2">Delete</a>
+                <a href="/update_professor/{{query.id }}" class="btn btn-success">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    </div>
+</body>
+</html>

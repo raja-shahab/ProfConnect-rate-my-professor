@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Professor Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202121;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #3FC3D7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header button {
+            background-color: #3FC3D7;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .chat-container {
+            background-color: #000000 ;
+            border-radius: 10px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            background-color: #202121;
+            color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .message strong {
+            background-color: #202121;
+            color: #fff;
+        }
+        .no-results {
+            text-align: center;
+            color: #888;
+        }
+        .input-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .input-container button {
+            background-color: #3FC3D7;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button onclick="window.location.href='/'">Home</button>
+            <h1>Find the Best Professor</h1>
+        </div>
+        <div class="chat-container">
+        <p>Best Professors of {{ user_input }} are: </p>
+            {% if best_professors %}
+                {% for prof in best_professors %}
+                    <div class="message">
+                        <strong>Name:</strong> {{ prof.name }}<br>
+                        <strong>Expertise:</strong> {{ prof.expertise }}<br>
+                        <strong>Experience:</strong> {{ prof.experience }} years<br>
+                        <strong>Rating:</strong> {{ prof.rating }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">No professors found.</p>
+            {% endif %}
+        </div>
+        <div class="input-container">
+            <form method="get">
+                <input style="width: 400px" type="text" id="query" name="query" placeholder="Enter Subject for Best Professors" required>
+                <button type="submit">Enter</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
