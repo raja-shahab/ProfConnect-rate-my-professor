@@ -6,6 +6,7 @@ from .models import Professor, Newsletter
 from django.core.mail import send_mail
 from django.contrib import messages
 
+# Add Email and Password in settings.py
 
 def index(request):
     if request.method == 'POST':
