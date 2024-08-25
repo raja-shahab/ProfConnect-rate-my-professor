@@ -132,8 +132,8 @@ STATICFILES_DIRS = [
 ]
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '215152@aack.au.edu.pk'
-EMAIL_HOST_PASSWORD = 'vqgsuerxtwpfbubx'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
